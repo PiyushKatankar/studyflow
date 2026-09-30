@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Global Defaults ──────────────────────────────────── */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.2);
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.2);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Glassmorphism Card ───────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-white/20 p-6;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .dark .glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    border-color: rgba(148, 163, 184, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .dark .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ─── 3D Flashcard Flip ────────────────────────────────── */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* ─── Scrollbar Styling ────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ─── Markdown Content Styling ─────────────────────────── */
+.markdown-preview h1 { @apply text-2xl font-bold mb-4 mt-6; }
+.markdown-preview h2 { @apply text-xl font-semibold mb-3 mt-5; }
+.markdown-preview h3 { @apply text-lg font-semibold mb-2 mt-4; }
+.markdown-preview p  { @apply mb-3 leading-relaxed; }
+.markdown-preview ul { @apply list-disc list-inside mb-3 space-y-1; }
+.markdown-preview ol { @apply list-decimal list-inside mb-3 space-y-1; }
+.markdown-preview code {
+  @apply bg-gray-100 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+.markdown-preview pre {
+  @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-xl mb-4 overflow-x-auto;
+}
+.markdown-preview pre code {
+  @apply bg-transparent text-gray-800 dark:text-gray-200 px-0 py-0;
+}
+.markdown-preview blockquote {
+  @apply border-l-4 border-indigo-400 pl-4 italic text-gray-600 dark:text-gray-400 my-3;
+}
+
+/* ─── KaTeX Overrides ──────────────────────────────────── */
+.katex-display {
+  @apply my-4;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
